@@ -4,16 +4,16 @@ class Library:
         self.book_id_counter = 1
 
     def add_book(self, title, author):
-        assert isinstance(title, str) and isinstance(author, str), 'Title and author must be strings'
+        assert isinstance(title, str) and isinstance(author, str), 'title and author must be strings'
         self.books.append({'id': self.book_id_counter, 'title': title, 'author': author, 'borrowed': False})
-        print(f"Book added: {title} by {author} (ID: {self.book_id_counter})")
+        print(f"book added: {title} by {author} (ID: {self.book_id_counter})")
         self.book_id_counter += 1
 
     def borrow_book(self, title):
         for book in self.books:
             if book['title'].lower() == title.lower() and not book['borrowed']:
                 book['borrowed'] = True
-                print(f"You have borrowed '{title}'")
+                print(f"you have borrowed '{title}'")
                 return
             elif book['title'].lower() == title.lower() and book['borrowed']:
                 print(f"'{title}' is already borrowed.")
@@ -24,30 +24,30 @@ class Library:
         for book in self.books:
             if book['title'].lower() == title.lower() and book['borrowed']:
                 book['borrowed'] = False
-                print(f"You have returned '{title}'")
+                print(f"you have returned '{title}'")
                 return
         print(f"'{title}' not found or not borrowed.")
 
     def display_books(self):
         available_books = [book for book in self.books if not book['borrowed']]
         if available_books:
-            print("Available Books:")
+            print("available Books:")
             for book in available_books:
-                print(f"ID: {book['id']}, Title: {book['title']}, Author: {book['author']}")
+                print(f"ID: {book['id']}, title: {book['title']}, author: {book['author']}")
         else:
-            print("No available books.")
+            print("no available books.")
 
     def check_book_id(self):
         try:
-            book_id = int(input("Enter the book ID to check: "))
+            book_id = int(input("enter the book ID to check: "))
             for book in self.books:
                 if book['id'] == book_id:
-                    status = 'Borrowed' if book['borrowed'] else 'Available'
-                    print(f"Book Found - Title: {book['title']}, Author: {book['author']}, Status: {status}")
+                    status = 'borrowed' if book['borrowed'] else 'available'
+                    print(f"book Found - title: {book['title']}, author: {book['author']}, status: {status}")
                     return
-            print(f"Book with ID {book_id} not found.")
+            print(f"book with ID {book_id} not found.")
         except ValueError as e:
-            print(f"Invalid input: {e}")
+            print(f"invalid input: {e}")
 
     def lambda_example(self):
         title_lengths = list(map(lambda book: len(book['title']), self.books))
@@ -64,28 +64,28 @@ class Library:
 def menu():
     library = Library()
     global library_name
-    library_name = "City Library"
+    library_name = "Library Ng Lahat"
     print(f"Welcome to {library_name}")
     while True:
         print("\nChoose an option:")
-        print("1. Add Book")
-        print("2. Borrow Book")
-        print("3. Return Book")
-        print("4. Display Books")
-        print("5. Check Book ID")
-        print("6. Book title lengths")
-        print("7. GenerateBook IDs")
-        print("8. Exit")
-        choice = input("Enter your choice (1-8): ")
+        print("1. add Book")
+        print("2. borrow Book")
+        print("3. return Book")
+        print("4. display Books")
+        print("5. check Book ID")
+        print("6. book title lengths")
+        print("7. generateBook IDs")
+        print("8. exit")
+        choice = input("enter your choice (1-8): ")
         if choice == '1':
-            title = input("Enter book title: ")
-            author = input("Enter book author: ")
+            title = input("enter book title: ")
+            author = input("enter book author: ")
             library.add_book(title, author)
         elif choice == '2':
-            title = input("Enter book title to borrow: ")
+            title = input("enter book title to borrow: ")
             library.borrow_book(title)
         elif choice == '3':
-            title = input("Enter book title to return: ")
+            title = input("enter book title to return: ")
             library.return_book(title)
         elif choice == '4':
             library.display_books()
@@ -94,11 +94,11 @@ def menu():
         elif choice == '6':
             library.lambda_example()
         elif choice == '7':
-            print("Generated book IDs of available books:", list(library.generate_numbers()))
+            print("generated book IDs of available books:", list(library.generate_numbers()))
         elif choice == '8':
-            print("Exiting the library system. Goodbye!")
+            print("exiting the library system. goodbye!")
             break
         else:
-            print("Invalid choice. Please try again.")
+            print("invalid choice. Please try again.")
 
 menu()
